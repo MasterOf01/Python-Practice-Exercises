@@ -17,18 +17,26 @@ def play_game():
     spaces=generate_wheel()
     print(spaces)
     money=1000
-    print("you have $"+str(money))
-    bet=input("how much do want to bet?")
-    bet=int(bet)
-    color=input("what color do you want to bet on?")
-    print("The wheel is spining.......")
-    time.sleep(2)
-    landed=spin_wheel(spaces)
-    print("It landed on "+landed)
-    if color==landed:
-        money=money+bet
-        print("congrats! you now have $"+str(money))
-    else:
-        money=money-bet
-        print("Womp Womp! you now have $"+str(money))
+    while True:
+        print("you have $"+str(money))
+        bet=int(input("how much do want to bet?"))
+        while bet>money:
+            bet=int(input("YOU HAVE LESS THAN THAT MUCH MONEY!! PUT LESS"))
+        color=input("what color do you want to bet on?")
+        print("The wheel is spining.......")
+        time.sleep(2)
+        landed=spin_wheel(spaces)
+        print("It landed on "+landed)
+        if color==landed:
+            money=money+bet
+            print("congrats! you now have $"+str(money))
+        else:
+            money=money-bet
+            print("Womp Womp! you now have $"+str(money))
+        if money<=0:
+            print("GET OUT")
+            break
+        play_again=input("wanna play again?")
+        if play_again=="no":
+            break
 play_game()
